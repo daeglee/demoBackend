@@ -1,11 +1,14 @@
 package com.example.demo.controller;
 
+import com.example.demo.DateType;
 import com.example.demo.frontConfig.ChartInfo;
 import com.example.demo.frontConfig.FrontConfigService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -18,7 +21,9 @@ public class ChartController {
 
     @GetMapping("list")
     public List<ChartInfo> getChartLists(){
-        log.info("haha");
+
+        log.info("is null {}", configService);
+
         return configService.findAll();
     }
 

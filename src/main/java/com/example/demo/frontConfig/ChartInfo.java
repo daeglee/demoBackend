@@ -6,32 +6,84 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-@Data
-@Entity(name = "chart")
+@Entity(name = "charts")
 @AllArgsConstructor
 @NoArgsConstructor
 public class ChartInfo {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
-    @NotNull
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private int x;
-    @NotNull
     private int y;
-    @NotNull
     private int height;
-    @NotNull
     private int width;
-    @NotNull
     private DateType dateType;
-    @NotNull
     private String chartType;
-    @NotNull
     private String rawDataType;
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public void setWidth(int width) {
+        this.width = width;
+    }
+
+    public DateType getDateType() {
+        return dateType;
+    }
+
+    public void setDateType(DateType dateType) {
+        this.dateType = dateType;
+    }
+
+    public String getChartType() {
+        return chartType;
+    }
+
+    public void setChartType(String chartType) {
+        this.chartType = chartType;
+    }
+
+    public String getRawDataType() {
+        return rawDataType;
+    }
+
+    public void setRawDataType(String rawDataType) {
+        this.rawDataType = rawDataType;
+    }
 }
