@@ -2,16 +2,21 @@ package com.example.demo.frontConfig;
 
 import com.example.demo.DateType;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
+
 import javax.annotation.PostConstruct;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class TestDataInit {
     private final FrontConfigRepository repository;
 
     @PostConstruct
     public void init() {
+        log.info("init ----");
 
         ChartInfo chartInfo = new ChartInfo();
         chartInfo.setX((int)(Math.random() * 100));
@@ -32,5 +37,7 @@ public class TestDataInit {
         chartInfo2.setRawDataType("memory");
         repository.save(chartInfo);
         repository.save(chartInfo2);
+        log.info("saved ----");
+        log.info("chartInfo 1 {}" , repository.findAll());
     }
 }
