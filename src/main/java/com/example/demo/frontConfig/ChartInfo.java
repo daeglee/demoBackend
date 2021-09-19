@@ -1,9 +1,9 @@
 package com.example.demo.frontConfig;
 
-import com.example.demo.DateType;
-import com.sun.istack.NotNull;
+import com.example.demo.type.ChartType;
+import com.example.demo.type.DateType;
+import com.example.demo.type.RawDataType;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
@@ -20,8 +20,8 @@ public class ChartInfo {
     private int height;
     private int width;
     private DateType dateType;
-    private String chartType;
-    private String rawDataType;
+    private ChartType chartType;
+    private RawDataType rawDataType;
 
     public Long getId() {
         return id;
@@ -71,19 +71,19 @@ public class ChartInfo {
         this.dateType = dateType;
     }
 
-    public String getChartType() {
+    public ChartType getChartType() {
         return chartType;
     }
 
-    public void setChartType(String chartType) {
+    public void setChartType(ChartType chartType) {
         this.chartType = chartType;
     }
 
-    public String getRawDataType() {
+    public RawDataType getRawDataType() {
         return rawDataType;
     }
 
-    public void setRawDataType(String rawDataType) {
+    public void setRawDataType(RawDataType rawDataType) {
         this.rawDataType = rawDataType;
     }
 }

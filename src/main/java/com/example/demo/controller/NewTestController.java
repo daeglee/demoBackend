@@ -1,10 +1,9 @@
 package com.example.demo.controller;
 
-import com.example.demo.DateType;
+import com.example.demo.type.DateType;
 import com.example.demo.dto.CPUUsage;
 import com.example.demo.dto.MemoryUsage;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;

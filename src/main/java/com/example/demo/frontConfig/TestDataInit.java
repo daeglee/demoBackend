@@ -1,10 +1,11 @@
 package com.example.demo.frontConfig;
 
-import com.example.demo.DateType;
+import com.example.demo.type.ChartType;
+import com.example.demo.type.DateType;
+import com.example.demo.type.RawDataType;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
@@ -24,8 +25,8 @@ public class TestDataInit {
         chartInfo.setWidth(400);
         chartInfo.setHeight(400);
         chartInfo.setDateType(DateType.second);
-        chartInfo.setChartType("area");
-        chartInfo.setRawDataType("cpu");
+        chartInfo.setChartType(ChartType.area);
+        chartInfo.setRawDataType(RawDataType.cpu);
 
         ChartInfo chartInfo2 = new ChartInfo();
         chartInfo2.setX((int)(Math.random() * 100));
@@ -33,8 +34,8 @@ public class TestDataInit {
         chartInfo2.setWidth(500);
         chartInfo2.setHeight(500);
         chartInfo2.setDateType(DateType.minute);
-        chartInfo2.setChartType("bar");
-        chartInfo2.setRawDataType("memory");
+        chartInfo2.setChartType(ChartType.bar);
+        chartInfo2.setRawDataType(RawDataType.memory);
         repository.save(chartInfo);
         repository.save(chartInfo2);
         log.info("saved ----");
