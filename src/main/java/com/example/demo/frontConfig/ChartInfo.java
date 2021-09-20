@@ -17,8 +17,8 @@ public class ChartInfo {
     private Long id;
     private int x;
     private int y;
-    private int height;
-    private int width;
+    private String height;
+    private String width;
     private DateType dateType;
     private ChartType chartType;
     private RawDataType rawDataType;
@@ -47,22 +47,6 @@ public class ChartInfo {
         this.y = y;
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public void setHeight(int height) {
-        this.height = height;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public void setWidth(int width) {
-        this.width = width;
-    }
-
     public DateType getDateType() {
         return dateType;
     }
@@ -85,5 +69,21 @@ public class ChartInfo {
 
     public void setRawDataType(RawDataType rawDataType) {
         this.rawDataType = rawDataType;
+    }
+
+    public String getHeight() {
+        return height;
+    }
+
+    public void setHeight(String height) {
+        this.height = height;
+    }
+
+    public String getWidth() {
+        return width;
+    }
+
+    public void setWidth(String width) {
+        this.width = width;
     }
 }
