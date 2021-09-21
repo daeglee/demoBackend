@@ -21,7 +21,7 @@ public class ChartController {
      */
 
     @GetMapping("list")
-    public List<ChartInfo> getChartLists(){
+    public List<ChartInfo> getChartLists() {
         return configService.findAll();
     }
 
@@ -29,15 +29,10 @@ public class ChartController {
      * Save 기능
      */
     @PostMapping("list/save")
-    public void updateChartLists(@RequestBody List<ChartInfo> chartInfos){
+    public void updateChartLists(@RequestBody List<ChartInfo> chartInfos) {
 
         for (ChartInfo chartInfo : chartInfos) {
-
-            if(configService.findById(chartInfo.getId()) != null)
-            {configService.updateById(chartInfo.getId(), chartInfo);}
-            else{
-                configService.save(chartInfo);
-            }
+            configService.updateById(chartInfo.getId(), chartInfo);
         }
 
     }
@@ -47,7 +42,7 @@ public class ChartController {
      * 사용되지않는 기능
      */
     @GetMapping("{id}")
-    public ChartInfo getChart(@PathVariable Long id){
+    public ChartInfo getChart(@PathVariable Long id) {
         return configService.findById(id);
     }
 
@@ -55,7 +50,7 @@ public class ChartController {
      * Delete 기능
      */
     @DeleteMapping("{id}")
-    public ChartInfo DeleteChart(@PathVariable Long id, ChartInfo chartInfo){
+    public ChartInfo DeleteChart(@PathVariable Long id, ChartInfo chartInfo) {
         return configService.updateById(id, chartInfo);
     }
 
@@ -63,7 +58,7 @@ public class ChartController {
      * Edit 기능
      */
     @PutMapping("{id}")
-    public ChartInfo updateChart(@PathVariable Long id, ChartInfo chartInfo){
+    public ChartInfo updateChart(@PathVariable Long id, ChartInfo chartInfo) {
         return configService.updateById(id, chartInfo);
     }
 
@@ -73,7 +68,7 @@ public class ChartController {
      * 하지만 결국 'Save' 버튼을 누름으로 저장되니까 실제로는 사용되지 않은 기능이라고 할 수 있음
      */
     @PostMapping("save")
-    public ChartInfo save(@RequestBody ChartInfo chartInfo){
+    public ChartInfo save(@RequestBody ChartInfo chartInfo) {
         return configService.save(chartInfo);
     }
 

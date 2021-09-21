@@ -14,12 +14,9 @@ import java.util.ArrayList;
 @RequestMapping("/api")
 public class NewTestController {
 
-    @GetMapping("/cpu/{startTime}/{endTime}")
-    public ArrayList<CPUUsage> getCPUUsage(@PathVariable long startTime, @PathVariable long endTime,
-                                           @RequestParam(value = "type") DateType dateType){
 
-        ArrayList<CPUUsage> cpuUsages = new ArrayList<>();
 
+    private int calculateDataInterval(DateType dateType){
         int dataInterval = 1;
 
         // 결국 dateType에 따라
@@ -38,6 +35,26 @@ public class NewTestController {
             case minute:
                 dataInterval *= 60;
         }
+        return dataInterval;
+    }
+
+    private long calculateStartTime(long startTime, int dataInterval){
+        if(startTime % dataInterval > 0){
+            startTime = (((long)(startTime/dataInterval) + 1) * dataInterval);
+        }
+        return startTime;
+    }
+
+    @GetMapping("/cpu/{startTime}/{endTime}")
+    public ArrayList<CPUUsage> getCPUUsage(@PathVariable long startTime, @PathVariable long endTime,
+                                           @RequestParam(value = "type") DateType dateType){
+
+        ArrayList<CPUUsage> cpuUsages = new ArrayList<>();
+
+        int dataInterval = calculateDataInterval(dateType);
+
+        startTime = calculateStartTime(startTime, dataInterval);
+
 
         for (long i = startTime; i<=endTime; i+= dataInterval){
             CPUUsage cpuUsage = new CPUUsage();
@@ -56,24 +73,9 @@ public class NewTestController {
 
         ArrayList<MemoryUsage> memoryUsages = new ArrayList<>();
 
-        int dataInterval = 1;
+        int dataInterval = calculateDataInterval(dateType);
 
-        // 결국 dateType에 따라
-        // 다른 테이블을 선택해야함
-        // 하지만 여기서는
-        // 임시적으로 데이터를 생성함
-        switch (dateType){
-            case second:
-                break;
-            case month:
-                dataInterval *= 12;
-            case day:
-                dataInterval *= 24;
-            case hour:
-                dataInterval *= 60;
-            case minute:
-                dataInterval *= 60;
-        }
+        startTime = calculateStartTime(startTime, dataInterval);
         for (long i = startTime; i<=endTime; i+= dataInterval){
             MemoryUsage memoryUsage = new MemoryUsage();
             memoryUsage.setMemoryUsage(BigDecimal.valueOf((int)(Math.random() * 100)));

@@ -5,12 +5,14 @@ import com.example.demo.type.DateType;
 import com.example.demo.type.RawDataType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 
 @Entity(name = "charts")
 @AllArgsConstructor
 @NoArgsConstructor
+@ToString
 public class ChartInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,8 +21,12 @@ public class ChartInfo {
     private int y;
     private String height;
     private String width;
+
+    @Enumerated(EnumType.STRING)
     private DateType dateType;
+    @Enumerated(EnumType.STRING)
     private ChartType chartType;
+    @Enumerated(EnumType.STRING)
     private RawDataType rawDataType;
 
     public Long getId() {

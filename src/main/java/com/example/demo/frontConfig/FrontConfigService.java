@@ -40,12 +40,24 @@ public class FrontConfigService {
             repository.save(chart.get());
 
             return chart.get();
+        } else {
+            ChartInfo chartInfoNew = new ChartInfo();
+            chartInfoNew.setChartType(chartInfo.getChartType());
+            chartInfoNew.setRawDataType(chartInfo.getRawDataType());
+            chartInfoNew.setDateType(chartInfo.getDateType());
+            chartInfoNew.setX(chartInfo.getX());
+            chartInfoNew.setY(chartInfo.getY());
+            chartInfoNew.setHeight(chartInfo.getHeight());
+            chartInfoNew.setWidth(chartInfo.getWidth());
+            repository.save(chartInfoNew);
         }
         return null;
     }
 
     public ChartInfo save(ChartInfo chartInfo) {
+        log.info("ChartInfo save(ChartInfo chartInfo)");
         repository.save(chartInfo);
+        log.info("ChartInfo save(ChartInfo chartInfo)2");
         return chartInfo;
     }
 }
