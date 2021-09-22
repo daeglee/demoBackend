@@ -32,7 +32,11 @@ public class ChartController {
     public void updateChartLists(@RequestBody List<ChartInfo> chartInfos) {
 
         for (ChartInfo chartInfo : chartInfos) {
-            configService.updateById(chartInfo.getId(), chartInfo);
+            if(chartInfo.getX() == -20000 && chartInfo.getY() == -20000){ // delete
+                configService.deleteById(chartInfo.getId());
+            }else{ // update or save
+                configService.updateById(chartInfo.getId(), chartInfo);
+            }
         }
 
     }
