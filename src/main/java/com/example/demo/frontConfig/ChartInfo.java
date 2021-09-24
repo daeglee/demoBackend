@@ -8,11 +8,12 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "charts")
 @AllArgsConstructor
 @NoArgsConstructor
-@ToString
 public class ChartInfo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,6 +29,18 @@ public class ChartInfo {
     private ChartType chartType;
     @Enumerated(EnumType.STRING)
     private RawDataType rawDataType;
+
+    @ManyToMany
+    @JoinColumn(name = "resources", referencedColumnName = "resource")
+    private List<Resource> resourceList;
+
+    public List<Resource> getResourceList() {
+        return resourceList;
+    }
+
+    public void setResourceList(List<Resource> resourceList) {
+        this.resourceList = resourceList;
+    }
 
     public Long getId() {
         return id;
