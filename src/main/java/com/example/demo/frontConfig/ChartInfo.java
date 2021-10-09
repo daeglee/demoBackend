@@ -6,6 +6,7 @@ import com.example.demo.type.RawDataType;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import org.hibernate.engine.internal.Cascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -30,7 +31,7 @@ public class ChartInfo {
     @Enumerated(EnumType.STRING)
     private RawDataType rawDataType;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "resources", referencedColumnName = "resource")
     private List<Resource> resourceList;
 

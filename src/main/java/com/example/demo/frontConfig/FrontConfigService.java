@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +14,7 @@ import java.util.Optional;
 public class FrontConfigService {
 
     private final FrontConfigRepository repository;
+    private final ResourceRepository resourceRepository;
 
     public List<ChartInfo> findAll() {
         return repository.findAll();
@@ -28,6 +29,12 @@ public class FrontConfigService {
     }
 
     public ChartInfo updateById(Long chartNo,ChartInfo chartInfo) {
+        ArrayList<Resource> resources = new ArrayList<>();
+        for (Resource resource : chartInfo.getResourceList()) {
+            Optional<Resource> resourceOptional = resourceRepository.findById(resource.getId());
+            resourceOptional.ifPresent(resources::add);
+        }
+        
         Optional<ChartInfo> chart = repository.findById(chartNo);
         if (chart.isPresent()) {
             chart.get().setChartType(chartInfo.getChartType());
@@ -37,6 +44,7 @@ public class FrontConfigService {
             chart.get().setWidth(chartInfo.getWidth());
             chart.get().setX(chartInfo.getX());
             chart.get().setY(chartInfo.getY());
+            chart.get().setResourceList(resources);
             repository.save(chart.get());
 
             return chart.get();
@@ -49,6 +57,7 @@ public class FrontConfigService {
             chartInfoNew.setY(chartInfo.getY());
             chartInfoNew.setHeight(chartInfo.getHeight());
             chartInfoNew.setWidth(chartInfo.getWidth());
+            chartInfoNew.setResourceList(resources);
             repository.save(chartInfoNew);
         }
         return null;
